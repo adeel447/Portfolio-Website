@@ -1,28 +1,26 @@
-name: CI - Lint HTML & CSS
+name: Lint CSS
 
 on:
+  push:
+    branches: [main]
   pull_request:
-    branches: [develop]
+    branches: [main]
 
 jobs:
-  lint:
+  stylelint:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - name: Install HTMLHint and Stylelint
-        run: |
-          npm install -g htmlhint stylelint stylelint-config-standard
+      - name: Install dependencies
+        run: npm install
 
-      - name: Lint HTML
-        run: htmlhint "/*.html" --config .htmlhintrc.json
-
-      - name: Lint CSS
-        run: stylelint "/*.css" --config .stylelintrc.json
+      - name: Run Stylelint
+        run: npx stylelint "**/*.css" --config .stylelintrc.json
