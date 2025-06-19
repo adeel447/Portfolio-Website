@@ -8,9 +8,7 @@
     "property-no-unknown": [
       true,
       {
-        "ignoreProperties": [
-          "^--.*"
-        ]
+        "ignoreProperties": ["/^--.*/"]
       }
     ]
   }
